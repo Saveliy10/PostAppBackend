@@ -8,7 +8,7 @@ async function bootstrap() {
 	app.useGlobalPipes(new ValidationPipe());
 
 	app.enableCors({
-		origin: 'http://localhost:5173', // Порт вашего фронтенда (Vite/React/CRA и т.д.)
+		origin: process.env.CLIENT_URL?.split(',') ?? ['http://localhost:5173'],
 		credentials: true,
 	});
 
