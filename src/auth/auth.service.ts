@@ -15,8 +15,6 @@ export class AuthService {
   private readonly JWT_ACCESS_TOKEN_TTL: StringValue;
   private readonly JWT_REFRESH_TOKEN_TTL: StringValue;
 
-  private readonly COOKIE_DOMAIN: string;
-
   constructor(
     private readonly prismaService: PrismaService,
     private readonly configService: ConfigService,
@@ -24,8 +22,6 @@ export class AuthService {
   ) {
     this.JWT_ACCESS_TOKEN_TTL = this.configService.getOrThrow<StringValue>('JWT_ACCESS_TOKEN_TTL');
     this.JWT_REFRESH_TOKEN_TTL = this.configService.getOrThrow<StringValue>('JWT_REFRESH_TOKEN_TTL');
-
-    this.COOKIE_DOMAIN = this.configService.getOrThrow<string>('COOKIE_DOMAIN');
   }
 
   async register(res: Response, dto: RegisterRequest) {
@@ -135,10 +131,10 @@ export class AuthService {
   private setCookie(res: Response, value: string, expires: Date) {
     res.cookie('refreshToken', value, {
       httpOnly: true,
-      domain: this.COOKIE_DOMAIN,
+      // domain: this.COOKIE_DOMAIN,
       expires,
       secure: !isDev(this.configService),
-      sameSite: isDev(this.configService) ? 'none' : 'lax',
+      sameSite: 'none',
     });
   }
 }
