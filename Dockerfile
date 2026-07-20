@@ -29,4 +29,4 @@ RUN npm run prisma:generate
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "npm run db:push && node dist/main"]
+CMD ["sh", "-c", "npm run db:push && node dist/src/main.js"]
