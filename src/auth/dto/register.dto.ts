@@ -1,6 +1,7 @@
 import { IsNotEmpty, IsString, MaxLength, MinLength } from 'class-validator';
 
 export class RegisterRequest {
+
 	@IsString({ message: 'Name must be a string' })
 	@IsNotEmpty({ message: 'Name is required' })
 	@MaxLength(50, { message: 'Name must not exceed 50 characters' })
