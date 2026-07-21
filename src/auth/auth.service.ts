@@ -49,6 +49,8 @@ export class AuthService {
   }
 
   async login(res: Response, dto: LoginRequest) {
+    console.log("LOGIN START");
+
     const { username, password } = dto;
 
     const user = await this.prismaService.user.findUnique({
@@ -111,7 +113,10 @@ export class AuthService {
   }
 
   private auth(res: Response, id: string) {
+    console.log("AUTH");
     const { accessToken, refreshToken } = this.generateTokens(id);
+
+    console.log("TOKENS GENERATED");
 
     this.setCookie(res, refreshToken, new Date(7 * 24 * 60 * 60 * 1000 + Date.now())); // 7 days
 
