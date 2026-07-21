@@ -11,12 +11,14 @@ export class AuthController {
 	@Post('register')
 	@HttpCode(HttpStatus.CREATED)
 	async register(@Res({ passthrough: true }) res: Response, @Body() dto: RegisterRequest) {
+		console.log('CONTROLLER CREATED', dto);
 		return await this.authService.register(res, dto);
 	}
 
 	@Post('login')
 	@HttpCode(HttpStatus.OK)
 	async login(@Res({ passthrough: true }) res: Response, @Body() dto: LoginRequest) {
+		console.log('CONTROLLER LOGIN', dto);
 		return await this.authService.login(res, dto);
 	}
 
