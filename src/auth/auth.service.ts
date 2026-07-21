@@ -65,11 +65,15 @@ export class AuthService {
       throw new NotFoundException('Invalid username or password');
     }
 
+    console.log('user.password good');
+
     const isValidPassword = await verify(user.password, password);
 
     if (!isValidPassword) {
       throw new NotFoundException('Invalid username or password');
     }
+
+    console.log('user.password valid');
 
     return this.auth(res, user.id);
   }
